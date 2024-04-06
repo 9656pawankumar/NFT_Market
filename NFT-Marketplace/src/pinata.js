@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 const key = process.env.REACT_APP_PINATA_KEY;
 const secret = process.env.REACT_APP_PINATA_SECRET;
 
@@ -7,7 +7,6 @@ const FormData = require('form-data');
 
 export const uploadJSONToIPFS = async(JSONBody) => {
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
-    //making axios POST request to Pinata ⬇️
     return axios 
         .post(url, JSONBody, {
             headers: {
@@ -33,7 +32,6 @@ export const uploadJSONToIPFS = async(JSONBody) => {
 
 export const uploadFileToIPFS = async(file) => {
     const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-    //making axios POST request to Pinata ⬇️
     
     let data = new FormData();
     data.append('file', file);

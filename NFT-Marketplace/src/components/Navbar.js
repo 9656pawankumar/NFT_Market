@@ -1,4 +1,4 @@
-import logo from '../logo_3.png';
+import logo from '../logo.png';
 import fullLogo from '../full_logo.png';
 import {
   BrowserRouter as Router,
@@ -37,12 +37,12 @@ function updateButton() {
 async function connectWebsite() {
 
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if(chainId !== '0x5')
+    if(chainId !== '11155111')
     {
       //alert('Incorrect network! Switch your metamask network to Rinkeby');
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
+        params: [{ chainId: '11155111' }],
      })
     }  
     await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -73,56 +73,49 @@ async function connectWebsite() {
 
     return (
       <div className="">
-        <nav className="w-screen">
+      <nav className="w-screen" style={{ background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.5))' }}>
           <ul className='flex items-end justify-between py-3 bg-transparent text-white pr-5'>
-          <li className='flex items-end ml-5 pb-2'>
-            <Link to="/">
-            <img src={fullLogo} alt="" width={120} height={120} className="inline-block -mt-2"/>
-            <div className='inline-block font-bold text-xl ml-2'>
-              NFT Marketplace
-            </div>
-            </Link>
-          </li>
-          <li className='w-2/6'>
-            <ul className='lg:flex justify-between font-bold mr-10 text-lg'>
-              {location.pathname === "/" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
-                <Link to="/">Marketplace</Link>
+              <li className='w-3/10 flex items-end'>
+                  <ul className='lg:flex justify-start font-bold mr-10 text-lg'>
+                      {location.pathname === "/profile" ? 
+                          <li className='border-b-2 hover:pb-0 p-2'>
+                              <Link className="text-black" to="/profile">Profile</Link>
+                          </li>
+                          :
+                          <li className='hover:border-b-2 hover:pb-0 p-2'>
+                              <Link className="text-black" to="/profile">Profile</Link>
+                          </li>              
+                      }  
+                  </ul>
               </li>
-              :
-              <li className='hover:border-b-2 hover:pb-0 p-2'>
-                <Link to="/">Marketplace</Link>
-              </li>              
-              }
-              {location.pathname === "/sellNFT" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
-                <Link to="/sellNFT">List My NFT</Link>
+              <li className='w-3/10 text-center font-bold text-xl'>
+                  <img src={logo} alt="" width={40} height={40} className="inline-block -mt-2"/>
+                  NFT Marketplace
               </li>
-              :
-              <li className='hover:border-b-2 hover:pb-0 p-2'>
-                <Link to="/sellNFT">List My NFT</Link>
-              </li>              
-              }              
-              {location.pathname === "/profile" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
-                <Link to="/profile">Profile</Link>
+              <li className='w-3/10 flex justify-end items-end'>
+                  <ul className='lg:flex justify-end font-bold mr-10 text-lg'>
+                      {location.pathname === "/sellNFT" ? 
+                          <li className='border-b-2 hover:pb-0 p-2'>
+                              <Link to="/sellNFT">List My NFT</Link>
+                          </li>
+                          :
+                          <li className='hover:border-b-2 hover:pb-0 p-2'>
+                              <Link to="/sellNFT">List My NFT</Link>
+                          </li>              
+                      } 
+                      <li className="ml-5"> {/* Adjust the margin here */}
+                          <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
+                      </li>
+                  </ul>
               </li>
-              :
-              <li className='hover:border-b-2 hover:pb-0 p-2'>
-                <Link to="/profile">Profile</Link>
-              </li>              
-              }  
-              <li>
-                <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
-              </li>
-            </ul>
-          </li>
           </ul>
-        </nav>
-        <div className='text-white text-bold text-right mr-10 text-sm'>
+      </nav>
+      <div className='text-white text-bold text-right mr-10 text-sm'>
           {currAddress !== "0x" ? "Connected to":"Not Connected. Please login to view NFTs"} {currAddress !== "0x" ? (currAddress.substring(0,15)+'...'):""}
-        </div>
       </div>
+  </div>
+  
+
     );
   }
 

@@ -4,15 +4,13 @@
 
 body {
   margin: 0;
-  /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;*/
-  font-family: 'Open Sans',sans-serif;
-  /*font-family: 'M PLUS 1p', sans-serif;*/
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('./bg.png');
-  background-size: 200% 180%;
+  background-image: url('./bg.jpg');
+  background-size: 100% 100%;
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-delay: 0s;
