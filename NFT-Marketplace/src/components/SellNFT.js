@@ -21,16 +21,13 @@ export default function SellNFT () {
     async function enableButton() {
         const listButton = document.getElementById("list-button")
         listButton.disabled = false
-        listButton.style.backgroundColor = "#A500FF";
+        listButton.style.backgroundColor = "#86d67e";
         listButton.style.opacity = 1;
     }
 
-    //This function uploads the NFT image to IPFS
     async function OnChangeFile(e) {
         var file = e.target.files[0];
-        //check for file extension
         try {
-            //upload the file to IPFS
             disableButton();
             updateMessage("Uploading image.. please dont click anything!")
             const response = await uploadFileToIPFS(file);
@@ -112,7 +109,8 @@ export default function SellNFT () {
     return (
         <div className="">
         <Navbar></Navbar>
-        <div className="flex flex-col place-items-center mt-10 h-screen" id="nftForm">
+        
+        <div className="flex flex-col place-items-center mt-10" id="nftForm">
     <form className="shadow-md rounded px-8 pt-4 pb-8 mb-4 w-200" style={{ background: 'linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.5))' }}>
         <h3 className="text-center font-bold text-white mb-8">Upload your NFT to the marketplace</h3>
         <div className="mb-4">

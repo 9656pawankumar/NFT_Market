@@ -25,34 +25,33 @@ async function getAddress() {
   updateAddress(addr);
 }
 
-function updateButton() {
-  const ethereumButton = document.querySelector('.enableEthereumButton');
-  ethereumButton.textContent = "Connected";
-  ethereumButton.classList.remove("hover:bg-blue-70");
-  ethereumButton.classList.remove("bg-blue-500");
-  ethereumButton.classList.add("hover:bg-green-70");
-  ethereumButton.classList.add("bg-green-500");
-}
+// function updateButton() {
+//   const ethereumButton = document.querySelector('.enableEthereumButton');
+//   ethereumButton.textContent = "Connected";
+//   ethereumButton.classList.remove("hover:bg-blue-70");
+//   ethereumButton.classList.remove("bg-blue-500");
+//   ethereumButton.classList.add("hover:bg-green-70");
+//   ethereumButton.classList.add("bg-green-500");
+// }
 
-async function connectWebsite() {
+// async function connectWebsite() {
 
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if(chainId !== '11155111')
-    {
-      //alert('Incorrect network! Switch your metamask network to Rinkeby');
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '11155111' }],
-     })
-    }  
-    await window.ethereum.request({ method: 'eth_requestAccounts' })
-      .then(() => {
-        updateButton();
-        console.log("here");
-        getAddress();
-        window.location.replace(location.pathname)
-      });
-}
+//     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+//     if(chainId !== '11155111')
+//     {
+//       //alert('Incorrect network! Switch your metamask network to Rinkeby');
+//       await window.ethereum.request({
+//         method: 'wallet_switchEthereumChain',
+//         params: [{ chainId: '11155111' }],
+//      })
+//     }  
+//     await window.ethereum.request({ method: 'eth_requestAccounts' })
+//       .then(() => {
+//         updateButton();
+//         getAddress();
+//         window.location.replace(location.pathname)
+//       });
+// }
 
   useEffect(() => {
     if(window.ethereum == undefined)
@@ -63,7 +62,6 @@ async function connectWebsite() {
       console.log("here");
       getAddress();
       toggleConnect(val);
-      updateButton();
     }
 
     window.ethereum.on('accountsChanged', function(accounts){
@@ -76,13 +74,13 @@ async function connectWebsite() {
       <nav className="w-screen" style={{ background: 'linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.5))' }}>
           <ul className='flex items-end justify-between py-3 bg-transparent text-white pr-5'>
               <li className='w-3/10 flex items-end'>
-                  <ul className='lg:flex justify-start font-bold mr-10 text-lg'>
+                  <ul className='lg:flex justify-start font-bold mr-10 ml-10 text-lg'>
                       {location.pathname === "/profile" ? 
-                          <li className='border-b-2 hover:pb-0 p-2'>
+                          <li className='border-b-2 ml-2 hover:pb-0 p-2'>
                               <Link className="text-black" to="/profile">Profile</Link>
                           </li>
                           :
-                          <li className='hover:border-b-2 hover:pb-0 p-2'>
+                          <li className='hover:border-b-2'>
                               <Link className="text-black" to="/profile">Profile</Link>
                           </li>              
                       }  
@@ -99,20 +97,14 @@ async function connectWebsite() {
                               <Link to="/sellNFT">List My NFT</Link>
                           </li>
                           :
-                          <li className='hover:border-b-2 hover:pb-0 p-2'>
+                          <li className='hover:border-b-2'>
                               <Link to="/sellNFT">List My NFT</Link>
                           </li>              
                       } 
-                      <li className="ml-5"> {/* Adjust the margin here */}
-                          <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
-                      </li>
                   </ul>
               </li>
           </ul>
       </nav>
-      <div className='text-white text-bold text-right mr-10 text-sm'>
-          {currAddress !== "0x" ? "Connected to":"Not Connected. Please login to view NFTs"} {currAddress !== "0x" ? (currAddress.substring(0,15)+'...'):""}
-      </div>
   </div>
   
 
